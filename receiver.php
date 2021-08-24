@@ -1,10 +1,14 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // receive data
+    $property_data = $_POST;
+
     try {
-	$data = ($_POST);
-	print_r($data['property_price']);
-        //$r = shell_exec("python3 script.py");
-        //echo $r;
+        if (count($data) > 0) {
+            //  --- run script ---
+            $r = shell_exec("python3 script.py" . escapeshellarg(json_encode($property_data)));
+            echo $r;
+        }
     } catch (Exception $e) {
         print_r($e);
     }

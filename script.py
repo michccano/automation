@@ -1,11 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import time
-
-
 from selenium.webdriver.chrome.options import Options
+import sys, time, json
 
 
+# -------------- get data -------------------------
+property = json.loads(sys.argv[1]) 
+
+#  -------------- Make Chrome Driver --------------
 options =Options()
 options.add_argument("--headless") # Runs Chrome in headless mode.
 options.add_argument('--no-sandbox') # Bypass OS security model
@@ -27,19 +29,18 @@ elem.clear()
 elem.send_keys("Jan2020!")
 
 
-
 elem.send_keys(Keys.RETURN)
 time.sleep(5)
 
 
 elem = driver.find_element_by_id("post-title-0")
-elem.send_keys("New Property")
+elem.send_keys(property["post-title-0"])
 
 elem = driver.find_element_by_id("REAL_HOMES_property_price")
-elem.send_keys("1000")
+elem.send_keys(property["property_price"])
 
 elem = driver.find_element_by_id("REAL_HOMES_property_old_price")
-elem.send_keys("900")
+elem.send_keys("")
 
 elem = driver.find_element_by_id("REAL_HOMES_property_price_prefix")
 elem.send_keys("$")
@@ -48,16 +49,16 @@ elem = driver.find_element_by_id("REAL_HOMES_property_price_postfix")
 elem.send_keys(".00")
 
 elem = driver.find_element_by_id("REAL_HOMES_property_size")
-elem.send_keys("1200")
+elem.send_keys( property["property_size"])
 
 elem = driver.find_element_by_id("REAL_HOMES_property_size_postfix")
-elem.send_keys("postfix")
+elem.send_keys(property["size_postfix"])
 
 elem = driver.find_element_by_id("REAL_HOMES_property_lot_size")
-elem.send_keys("123")
+elem.send_keys("")
 
 elem = driver.find_element_by_id("REAL_HOMES_property_lot_size_postfix")
-elem.send_keys("2359")
+elem.send_keys("")
 
 elem = driver.find_element_by_id("REAL_HOMES_property_bedrooms")
 elem.send_keys("2")
@@ -69,10 +70,10 @@ elem = driver.find_element_by_id("REAL_HOMES_property_garage")
 elem.send_keys("1")
 
 elem = driver.find_element_by_id("REAL_HOMES_property_id")
-elem.send_keys("9804872")
+elem.send_keys(property["property_id"])
 
 elem = driver.find_element_by_id("REAL_HOMES_property_year_built")
-elem.send_keys("2019")
+elem.send_keys(property["year_built"])
 
 btns = driver.find_elements_by_tag_name("button")
 tb = ''
