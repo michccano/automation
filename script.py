@@ -3,7 +3,18 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 
-driver = webdriver.Chrome(executable_path=r"./chromedriver")
+from selenium.webdriver.chrome.options import Options
+
+
+options =Options()
+options.add_argument("--headless") # Runs Chrome in headless mode.
+options.add_argument('--no-sandbox') # Bypass OS security model
+options.add_argument('--disable-gpu')  # applicable to windows os only
+options.add_argument('start-maximized') # 
+options.add_argument('disable-infobars')
+options.add_argument("--disable-extensions")
+
+driver = webdriver.Chrome(options=options,executable_path=r"./chromedriver")
 driver.get("https://www.wellingtonandreeves.com.au/wp-admin/post-new.php?post_type=property")
 
 
