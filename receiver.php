@@ -1,16 +1,19 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // receive data
-$property_data = $_POST;
+//$property_data = $_POST;
 
-// $property_data = [
-//     "post-title-0" => "post title",
-//     "property_price" => "1000",
-//     "property_size" => "1200",
-//     "size_postfix" => "sq ft",
-//     "property_id" => "1234",
-//     "year_built" => "2000"
-// ];
+//print_r($property_data);
+
+ $property_data = [
+     "post-title-0" => "post title",
+     "property_price" => "1000",
+     "property_size" => "1200",
+     "size_postfix" => "sq ft",
+     "property_id" => "1234",
+     "year_built" => "2000",
+     "photos" => []
+ ];
 
 try {
     if (count($property_data) > 0) {
@@ -21,6 +24,6 @@ try {
 } catch (Exception $e) {
     print_r($e);
 }
-} else {
-echo "Hello Alien";
-}
+//} else {
+//echo "Hello Alien";
+//}

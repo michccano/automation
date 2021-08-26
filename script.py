@@ -6,7 +6,17 @@ import sys, time, json, urllib.request, os
 
 # -------------- get data -------------------------
 property = json.loads(sys.argv[1])
-images = (json.loads(property['photos'])
+
+#images = (json.loads(property['photos']))
+images = property['photos']
+
+print(images)
+
+#f = open("images.txt", "a")
+#f.write(images)
+#f.close()
+
+#print("error")
 
 #  -------------- Make Chrome Driver --------------
 options =Options()
@@ -78,6 +88,7 @@ elem.send_keys(property['year_built'])
 
 # before publish add more data to that form..
 # ------------------------------------------------------------
+
 gallery = driver.find_elements_by_class_name("rwmb-tab-gallery")
 gallery[0].click()
 
@@ -109,7 +120,7 @@ for index in range(len(images)):
 # ---- 
 current_path = os.getcwd()
 # ---- upload the downloaded pic 
-for index in range(len(image_links)):
+for index in range(len(images)):
     filename = current_path + "/file" + str(index) + ".jpg"
     the_input.send_keys(filename)
     time.sleep(5)
