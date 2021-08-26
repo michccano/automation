@@ -12,7 +12,21 @@
      "size_postfix" => "sq ft",
      "property_id" => "1234",
      "year_built" => "2000",
-     "photos" => []
+     "photos"=> [
+        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453779-hires.3850-GB002-1.jpg",
+        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.990-01.jpg",
+        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.5603-02.jpg",
+        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.1458-03.jpg",
+        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.1503-04.jpg",
+        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.1279-05.jpg",
+        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.4804-06.jpg",
+        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.3927-08.jpg",
+        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.4050-09.jpg",
+        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.2961-10a.jpg",
+        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.2198-12.jpg",
+        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.1570-13.jpg",
+        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.2304-001.jpg"
+    ]
  ];
 
 try {
