@@ -1,7 +1,9 @@
+from http.client import FOUND
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
-import sys, time, json
+import sys, time, json, urllib.request, os
+
 
 
 # -------------- get data -------------------------
@@ -57,68 +59,117 @@ REAL_HOMES_property_year_built        = 2000
 elem = driver.find_element_by_id("post-title-0")
 elem.send_keys(post_title)
 
-elem = driver.find_element_by_id("REAL_HOMES_property_price")
-elem.send_keys(REAL_HOMES_property_price)
+# elem = driver.find_element_by_id("REAL_HOMES_property_price")
+# elem.send_keys(REAL_HOMES_property_price)
 
-elem = driver.find_element_by_id("REAL_HOMES_property_old_price")
-elem.send_keys(REAL_HOMES_property_old_price)
+# elem = driver.find_element_by_id("REAL_HOMES_property_old_price")
+# elem.send_keys(REAL_HOMES_property_old_price)
 
-elem = driver.find_element_by_id("REAL_HOMES_property_price_prefix")
-elem.send_keys("$")
+# elem = driver.find_element_by_id("REAL_HOMES_property_price_prefix")
+# elem.send_keys("$")
 
-elem = driver.find_element_by_id("REAL_HOMES_property_price_postfix")
-elem.send_keys(".00")
+# elem = driver.find_element_by_id("REAL_HOMES_property_price_postfix")
+# elem.send_keys(".00")
 
-elem = driver.find_element_by_id("REAL_HOMES_property_size")
-elem.send_keys(REAL_HOMES_property_size)
+# elem = driver.find_element_by_id("REAL_HOMES_property_size")
+# elem.send_keys(REAL_HOMES_property_size)
 
-elem = driver.find_element_by_id("REAL_HOMES_property_size_postfix")
-elem.send_keys("size_postfix")
+# elem = driver.find_element_by_id("REAL_HOMES_property_size_postfix")
+# elem.send_keys("size_postfix")
 
-elem = driver.find_element_by_id("REAL_HOMES_property_lot_size")
-elem.send_keys("")
+# elem = driver.find_element_by_id("REAL_HOMES_property_lot_size")
+# elem.send_keys("")
 
-elem = driver.find_element_by_id("REAL_HOMES_property_lot_size_postfix")
-elem.send_keys("")
+# elem = driver.find_element_by_id("REAL_HOMES_property_lot_size_postfix")
+# elem.send_keys("")
 
-elem = driver.find_element_by_id("REAL_HOMES_property_bedrooms")
-elem.send_keys("2")
+# elem = driver.find_element_by_id("REAL_HOMES_property_bedrooms")
+# elem.send_keys("2")
 
-elem = driver.find_element_by_id("REAL_HOMES_property_bathrooms")
-elem.send_keys("2")
+# elem = driver.find_element_by_id("REAL_HOMES_property_bathrooms")
+# elem.send_keys("2")
 
-elem = driver.find_element_by_id("REAL_HOMES_property_garage")
-elem.send_keys("1")
+# elem = driver.find_element_by_id("REAL_HOMES_property_garage")
+# elem.send_keys("1")
 
-elem = driver.find_element_by_id("REAL_HOMES_property_id")
-elem.send_keys(REAL_HOMES_property_id)
+# elem = driver.find_element_by_id("REAL_HOMES_property_id")
+# elem.send_keys(REAL_HOMES_property_id)
 
-elem = driver.find_element_by_id("REAL_HOMES_property_year_built")
-elem.send_keys(REAL_HOMES_property_year_built)
+# elem = driver.find_element_by_id("REAL_HOMES_property_year_built")
+# elem.send_keys(REAL_HOMES_property_year_built)
 
-btns = driver.find_elements_by_tag_name("button")
-tb = ''
-driver.maximize_window()
-for btn in btns:
-    if "Publish" in btn.text:
-        tb = btn
-        print("SEEN 1")
+# btns = driver.find_elements_by_tag_name("button")
+# tb = ''
+# driver.maximize_window()
+# for btn in btns:
+#     if "Publish" in btn.text:
+#         tb = btn
+#         print("SEEN 1")
         
   
 
-time.sleep(4)
+# time.sleep(4)
 
-tb.click()
+# tb.click()
+
 time.sleep(4)
 
 # before publish add more data to that form..
 
 
+gallery = driver.find_elements_by_class_name("rwmb-tab-gallery")
+gallery[0].click()
+
+links = driver.find_elements_by_tag_name("a")
+addMediaButton = ""
+for link in links:
+    if "Add Media" in link.text:
+        addMediaButton = link
+        break
+
+time.sleep(2)
+
+addMediaButton.click()
+
+# get input field
+inputs = driver.find_elements_by_tag_name("input")
+the_input = ""
+for input in inputs:
+    if "file" in input.get_attribute("type"):
+        #print(input.get_attribute("id"))
+        the_input = input
+        break
 
 
+# ----------------------------------------
+# -------- download images
 
+image_links = [
+    "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453779-hires.3850-GB002-1.jpg",
+    "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.990-01.jpg",
+    "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.5603-02.jpg",
+    "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.1458-03.jpg",
+]
 
+for index in range(len(image_links)):
+    urllib.request.urlretrieve(image_links[index], "file"+str(index)+".jpg")
 
+# ---- 
+current_path = os.getcwd()
+# ---- upload the downloaded pic 
+for index in range(len(image_links)):
+    filename = current_path + "/file" + str(index) + ".jpg"
+    the_input.send_keys(filename)
+    time.sleep(5)
+
+buttons = driver.find_elements_by_tag_name("button")
+uploadButton = ""
+for button in buttons:
+    if "Select" in button.text:
+        uploadButton = button
+        break
+
+uploadButton.click()
 
 
 
