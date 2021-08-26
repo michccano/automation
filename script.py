@@ -9,8 +9,9 @@ property = json.loads(sys.argv[1])
 
 #images = (json.loads(property['photos']))
 images = property['photos']
+imageCount = len(images)
 
-print(images)
+#print(images)
 
 #f = open("images.txt", "a")
 #f.write(images)
@@ -88,53 +89,53 @@ elem.send_keys(property['year_built'])
 
 # before publish add more data to that form..
 # ------------------------------------------------------------
+# goto image upload if only have images
+if imageCount > 0 :
+    gallery = driver.find_elements_by_class_name("rwmb-tab-gallery")
+    gallery[0].click()
 
-gallery = driver.find_elements_by_class_name("rwmb-tab-gallery")
-gallery[0].click()
+    links = driver.find_elements_by_tag_name("a")
+    addMediaButton = ""
+    for link in links:
+        if "Add Media" in link.text:
+            addMediaButton = link
+            break
 
-links = driver.find_elements_by_tag_name("a")
-addMediaButton = ""
-for link in links:
-    if "Add Media" in link.text:
-        addMediaButton = link
-        break
+    time.sleep(2)
 
-time.sleep(2)
+    addMediaButton.click()
 
-addMediaButton.click()
+    # get input field
+    inputs = driver.find_elements_by_tag_name("input")
+    the_input = ""
+    for input in inputs:
+        if "file" in input.get_attribute("type"):
+            #print(input.get_attribute("id"))
+            the_input = input
+            break
 
-# get input field
-inputs = driver.find_elements_by_tag_name("input")
-the_input = ""
-for input in inputs:
-    if "file" in input.get_attribute("type"):
-        #print(input.get_attribute("id"))
-        the_input = input
-        break
+    # ----------------------------------------
+    # -------- download images ---------------
+    for index in range(imageCount):
+        urllib.request.urlretrieve(images[index], "file"+str(index)+".jpg")
 
-# ----------------------------------------
-# -------- download images ---------------
-for index in range(len(images)):
-    urllib.request.urlretrieve(images[index], "file"+str(index)+".jpg")
+    # ----
+    current_path = os.getcwd()
+    # ---- upload the downloaded pic
+    for index in range(imageCount):
+        filename = current_path + "/file" + str(index) + ".jpg"
+        the_input.send_keys(filename)
+        time.sleep(5)
 
-# ---- 
-current_path = os.getcwd()
-# ---- upload the downloaded pic 
-for index in range(len(images)):
-    filename = current_path + "/file" + str(index) + ".jpg"
-    the_input.send_keys(filename)
-    time.sleep(5)
+    buttons = driver.find_elements_by_tag_name("button")
+    uploadButton = ""
+    for button in buttons:
+        if "Select" in button.text:
+            uploadButton = button
+            break
 
-buttons = driver.find_elements_by_tag_name("button")
-uploadButton = ""
-for button in buttons:
-    if "Select" in button.text:
-        uploadButton = button
-        break
-
-uploadButton.click()
-
-
+    uploadButton.click()
+# ---------------- image upload finished ---------------
 
 # --------------------------------------------
 
