@@ -134,6 +134,8 @@ if imageCount > 0 :
             uploadButton = button
             break
 
+    time.sleep(3)
+
     uploadButton.click()
 # ---------------- image upload finished ---------------
 
@@ -153,5 +155,6 @@ time.sleep(4)
 
 # Publish
 driver.execute_script("for(var i=0; i<document.getElementsByTagName('button').length; i++){if(document.getElementsByTagName('button')[i].innerText=='Publish'){document.getElementsByTagName('button')[i].click();}}")
+time.sleep(5)
 # Close
 driver.close()
