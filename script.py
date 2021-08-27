@@ -124,7 +124,7 @@ try:
                 test = images[index]
                 urllib.request.urlretrieve(images[index], "file"+str(index)+".jpg")
         except Exception as e:
-            print(str(e) + test)
+            print(str(e) + test + str(imageCount) + "\n")
 
 
         # ----
