@@ -121,9 +121,10 @@ try:
         # -------- download images ---------------
         try:
             for index in range(imageCount):
+                test = images[index]
                 urllib.request.urlretrieve(images[index], "file"+str(index)+".jpg")
         except Exception as e:
-            print("error saving images : " + str(e))
+            print(str(e) + test)
 
 
         # ----
