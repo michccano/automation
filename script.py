@@ -14,7 +14,7 @@ property = json.loads(sys.argv[1])
 images = property['photos']
 imageCount = len(images)
 
-print(imageCount)
+print(images)
 
 # f = open("images.txt", "a")
 # f.write(str(imageCount))
