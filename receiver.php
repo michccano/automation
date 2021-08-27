@@ -1,6 +1,8 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // receive data
+    // test that reciving curl post
+    // create_file();
+
     $property_data = $_POST;
 } else {
     $property_data = [
@@ -14,10 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/40480083__1629939683-16541-MI232-1.jpg",
             "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/40480090__1629939690-20569-02.jpg",
             "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/40480091__1629939692-16450-03.jpg",
-            "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/40480093__1629939693-1604-04.jpg",
-            "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/40480094__1629939695-1445-05.jpg",
-            "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/40480096__1629939696-12417-06.jpg",
-            "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/40480097__1629939697-1493-07.jpg",
         ]
     ];
 }
@@ -30,4 +28,13 @@ try {
     }
 } catch (Exception $e) {
     print_r($e);
+}
+
+
+function create_file()
+{
+    $file = dirname(__FILE__) . "/post_data.txt";
+    $open = fopen($file, "a");
+    $write = fputs($open, "received here");
+    fclose($open);
 }
