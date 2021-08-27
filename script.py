@@ -118,8 +118,12 @@ try:
 
         # ----------------------------------------
         # -------- download images ---------------
-        for index in range(imageCount):
-            urllib.request.urlretrieve(images[index], "file"+str(index)+".jpg")
+        try:
+            for index in range(imageCount):
+                urllib.request.urlretrieve(images[index], "file"+str(index)+".jpg")
+        except:
+            print("error saving images")
+
 
         # ----
         current_path = os.getcwd()
@@ -139,8 +143,8 @@ try:
         time.sleep(3)
 
         uploadButton.click()
-except:
-    print("error")
+except Exception as e:
+    print("error in image operation :" + str(e))
 # ---------------- image upload finished ---------------
 
 # --------------------------------------------
