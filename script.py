@@ -7,10 +7,14 @@ import sys, time, json, urllib.request, os
 # -------------- get data -------------------------
 property = json.loads(sys.argv[1])
 
-images = json.loads(property['photos'])
+# print(property)
+
+# images = json.loads(property['photos'])
+
+images = property['photos']
 imageCount = len(images)
 
-print(images)
+print(imageCount)
 
 # f = open("images.txt", "a")
 # f.write(str(imageCount))
