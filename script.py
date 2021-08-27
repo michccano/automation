@@ -56,7 +56,7 @@ elem = driver.find_element_by_id("REAL_HOMES_property_old_price")
 elem.send_keys('0')
 
 elem = driver.find_element_by_id("REAL_HOMES_property_price_prefix")
-elem.send_keys('$')
+elem.send_keys('')
 
 elem = driver.find_element_by_id("REAL_HOMES_property_price_postfix")
 elem.send_keys('.00')
