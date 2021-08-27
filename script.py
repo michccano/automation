@@ -121,17 +121,20 @@ try:
         try:
             for index in range(imageCount):
                 urllib.request.urlretrieve(images[index], "file"+str(index)+".jpg")
-        except:
-            print("error saving images")
+        except Exception as e:
+            print("error saving images : " + str(e))
 
 
         # ----
         current_path = os.getcwd()
         # ---- upload the downloaded pic
-        for index in range(imageCount):
-            filename = current_path + "/file" + str(index) + ".jpg"
-            the_input.send_keys(filename)
-            time.sleep(5)
+        try:
+            for index in range(imageCount):
+                filename = current_path + "/file" + str(index) + ".jpg"
+                the_input.send_keys(filename)
+                time.sleep(5)
+        except Exception as e: 
+            print("Uploading error: " + str(e))
 
         buttons = driver.find_elements_by_tag_name("button")
         uploadButton = ""
