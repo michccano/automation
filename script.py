@@ -13,9 +13,10 @@ imageCount = len(images)
 
 #print(images)
 
-#f = open("images.txt", "a")
-#f.write(images)
-#f.close()
+f = open("images.txt", "a")
+f.write(str(imageCount))
+f.write(images[0])
+f.close()
 
 #print("error")
 

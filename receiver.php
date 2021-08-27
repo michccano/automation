@@ -3,19 +3,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // receive data
 $property_data = $_POST;
 
-//print_r($property_data);
+print_r($property_data);
 
-// $property_data = [
-//     "post-title-0" => "post title",
-//     "property_price" => "1000",
-//     "property_size" => "1200",
-//     "size_postfix" => "sq ft",
-//     "property_id" => "1234",
-//     "year_built" => "2000",
-//     "photos"=> [
-//        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453779-hires.3850-GB002-1.jpg",
-//        "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.990-01.jpg",
-//    ]
+ //$property_data = [
+ //    "post-title-0" => "post title",
+ //    "property_price" => "1000",
+ //    "property_size" => "1200",
+ //    "size_postfix" => "sq ft",
+ //    "property_id" => "1234",
+ //    "year_built" => "2000",
+ //    "photos"=> [
+ //       "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453779-hires.3850-GB002-1.jpg",
+ //       "https://s3-ap-southeast-2.amazonaws.com/photos-clientvault-com/2326/mydimport-1608453927-hires.990-01.jpg",
+ //   ]
 // ];
 
 try {
