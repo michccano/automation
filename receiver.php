@@ -3,9 +3,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // test that reciving curl post
     // create_file();
 
-    $property_data = $_POST;
+    $property_data = ($_POST);
 
-    print_r($property_data);
+//    $pics = json_decode($property_data['photos']);
+
+// print_r($property_data);
+
 
 } else {
     $property_data = [
@@ -23,15 +26,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ];
 }
 
-// try {
-//     if (count($property_data) > 0) {
-//         //  --- run script ---
-//         $res = shell_exec('python3 script.py ' . escapeshellarg(json_encode($property_data)));
-//         echo $res;
-//     }
-// } catch (Exception $e) {
-//     print_r($e);
-// }
+ try {
+     if (count($property_data) > 0) {
+         //  --- run script ---
+         $res = shell_exec('python3 script.py ' . escapeshellarg(json_encode($property_data)));
+         echo $res;
+     }
+ } catch (Exception $e) {
+     print_r($e);
+ }
 
 
 function create_file()
