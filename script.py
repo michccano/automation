@@ -7,8 +7,7 @@ import sys, time, json, urllib.request, os
 # -------------- get data -------------------------
 property = json.loads(sys.argv[1])
 
-#images = (json.loads(property['photos']))
-images = property['photos']
+images = (json.loads(property['photos']))
 imageCount = len(images)
 
 #print(images)
