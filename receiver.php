@@ -1,6 +1,8 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // receive data
+    // test that reciving curl post
+    // create_file();
+
     $property_data = $_POST;
 } else {
     $property_data = [
@@ -26,4 +28,13 @@ try {
     }
 } catch (Exception $e) {
     print_r($e);
+}
+
+
+function create_file()
+{
+    $file = dirname(__FILE__) . "/post_data.txt";
+    $open = fopen($file, "a");
+    $write = fputs($open, "received here");
+    fclose($open);
 }
