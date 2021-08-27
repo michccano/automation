@@ -15,7 +15,6 @@ imageCount = len(images)
 
 # print(imageCount)
 
-
 # f = open("images.txt", "a")
 # f.write(str(imageCount))
 # f.write(images[0])
@@ -33,6 +32,7 @@ options.add_argument("--disable-extensions")
 
 driver = webdriver.Chrome(options=options,executable_path=r"./chromedriver")
 driver.get("https://www.wellingtonandreeves.com.au/wp-admin/post-new.php?post_type=property")
+driver.maximize_window()
 
 # login info
 elem = driver.find_element_by_id("user_login")
@@ -138,6 +138,7 @@ try:
         except Exception as e: 
             print("Uploading error: " + str(e))
 
+        time.sleep(5)
         buttons = driver.find_elements_by_tag_name("button")
         uploadButton = ""
         for button in buttons:
@@ -146,7 +147,6 @@ try:
                 break
 
         time.sleep(3)
-
         uploadButton.click()
     else:
         print("image count error")
@@ -159,12 +159,12 @@ except Exception as e:
 # -- start publishing
 btns = driver.find_elements_by_tag_name("button")
 tb = ''
-driver.maximize_window()
 for btn in btns:
     if "Publish" in btn.text:
         tb = btn
-
 time.sleep(2)
+
+
 tb.click()
 time.sleep(4)
 

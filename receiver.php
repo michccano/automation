@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  try {
      if (count($property_data) > 0) {
          //  --- run script ---
-         $res = shell_exec('sudo python3 script.py ' . escapeshellarg(json_encode($property_data)));
+         $res = shell_exec('python3 script.py ' . escapeshellarg(json_encode($property_data)));
          echo $res;
      }
  } catch (Exception $e) {
