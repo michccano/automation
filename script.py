@@ -7,7 +7,7 @@ import sys, time, json, urllib.request, os
 # -------------- get data -------------------------
 property = json.loads(sys.argv[1])
 
-# print(property)
+print(property)
 # images = json.loads(property['photos'])
 
 images = property['photos']
@@ -44,51 +44,55 @@ elem.clear()
 elem.send_keys("Jan2020!")
 
 elem.send_keys(Keys.RETURN)
-time.sleep(5)
+time.sleep(7)
 
 
 # ---- set variables to post -----
-elem = driver.find_element_by_id("post-title-0")
-elem.send_keys(property["post-title-0"])
+try:
+    elem = driver.find_element_by_id("post-title-0")
+    elem.send_keys(property["post-title-0"])
 
-elem = driver.find_element_by_id("REAL_HOMES_property_price")
-elem.send_keys(property['property_price'])
+    elem = driver.find_element_by_id("REAL_HOMES_property_price")
+    elem.send_keys(property['property_price'])
 
-elem = driver.find_element_by_id("REAL_HOMES_property_old_price")
-elem.send_keys('0')
+    elem = driver.find_element_by_id("REAL_HOMES_property_old_price")
+    elem.send_keys('0')
 
-elem = driver.find_element_by_id("REAL_HOMES_property_price_prefix")
-elem.send_keys('')
+    elem = driver.find_element_by_id("REAL_HOMES_property_price_prefix")
+    elem.send_keys('')
 
-elem = driver.find_element_by_id("REAL_HOMES_property_price_postfix")
-elem.send_keys('.00')
+    elem = driver.find_element_by_id("REAL_HOMES_property_price_postfix")
+    elem.send_keys('.00')
 
-elem = driver.find_element_by_id("REAL_HOMES_property_size")
-elem.send_keys( property['property_size'])
+    elem = driver.find_element_by_id("REAL_HOMES_property_size")
+    elem.send_keys( property['property_size'])
 
-elem = driver.find_element_by_id("REAL_HOMES_property_size_postfix")
-elem.send_keys(property['size_postfix'])
+    elem = driver.find_element_by_id("REAL_HOMES_property_size_postfix")
+    elem.send_keys(property['size_postfix'])
 
-elem = driver.find_element_by_id("REAL_HOMES_property_lot_size")
-elem.send_keys("")
+    elem = driver.find_element_by_id("REAL_HOMES_property_lot_size")
+    elem.send_keys("")
 
-elem = driver.find_element_by_id("REAL_HOMES_property_lot_size_postfix")
-elem.send_keys("")
+    elem = driver.find_element_by_id("REAL_HOMES_property_lot_size_postfix")
+    elem.send_keys("")
 
-elem = driver.find_element_by_id("REAL_HOMES_property_bedrooms")
-elem.send_keys("")
+    elem = driver.find_element_by_id("REAL_HOMES_property_bedrooms")
+    elem.send_keys("")
 
-elem = driver.find_element_by_id("REAL_HOMES_property_bathrooms")
-elem.send_keys("")
+    elem = driver.find_element_by_id("REAL_HOMES_property_bathrooms")
+    elem.send_keys("")
 
-elem = driver.find_element_by_id("REAL_HOMES_property_garage")
-elem.send_keys("")
+    elem = driver.find_element_by_id("REAL_HOMES_property_garage")
+    elem.send_keys("")
 
-elem = driver.find_element_by_id("REAL_HOMES_property_id")
-elem.send_keys(property['property_id'])
+    elem = driver.find_element_by_id("REAL_HOMES_property_id")
+    elem.send_keys(property['property_id'])
 
-elem = driver.find_element_by_id("REAL_HOMES_property_year_built")
-elem.send_keys(property['year_built'])
+    elem = driver.find_element_by_id("REAL_HOMES_property_year_built")
+    elem.send_keys(property['year_built'])
+    time.sleep(2)
+except Exception as e:
+    print(str(e))
 
 # before publish add more data to that form..
 # ------------------------------------------------------------
@@ -157,19 +161,23 @@ except Exception as e:
 # --------------------------------------------
 
 # -- start publishing
-btns = driver.find_elements_by_tag_name("button")
-tb = ''
-for btn in btns:
-    if "Publish" in btn.text:
-        tb = btn
-time.sleep(2)
+try:
+    btns = driver.find_elements_by_tag_name("button")
+    tb = ''
+    for btn in btns:
+        if "Publish" in btn.text:
+            tb = btn
+    time.sleep(2)
 
 
-tb.click()
-time.sleep(4)
+    tb.click()
+    time.sleep(4)
 
-# Publish
-driver.execute_script("for(var i=0; i<document.getElementsByTagName('button').length; i++){if(document.getElementsByTagName('button')[i].innerText=='Publish'){document.getElementsByTagName('button')[i].click();}}")
+    # Publish
+    driver.execute_script("for(var i=0; i<document.getElementsByTagName('button').length; i++){if(document.getElementsByTagName('button')[i].innerText=='Publish'){document.getElementsByTagName('button')[i].click();}}")
+except Exception as e:
+    print(str(e))
+
 time.sleep(5)
 # Close
 driver.close()
