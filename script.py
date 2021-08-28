@@ -7,7 +7,7 @@ import sys, time, json, urllib.request, os
 # -------------- get data -------------------------
 property = json.loads(sys.argv[1])
 
-print(property)
+# print(property)
 # images = json.loads(property['photos'])
 
 images = property['photos']
@@ -52,6 +52,18 @@ try:
     elem = driver.find_element_by_id("post-title-0")
     elem.send_keys(property["post-title-0"])
 
+    # an enter and add subtitle
+    elem.send_keys(Keys.RETURN)
+    time.sleep(1)
+    description = driver.find_elements_by_class_name("rich-text")
+    iterator = 0
+    for detail in property['property_description']:
+        description[iterator].send_keys(detail)
+        description[iterator].send_keys(Keys.RETURN)
+        iterator+=1
+        description = driver.find_elements_by_class_name("rich-text")
+    time.sleep(1)
+
     elem = driver.find_element_by_id("REAL_HOMES_property_price")
     elem.send_keys(property['property_price'])
 
@@ -91,6 +103,16 @@ try:
     elem = driver.find_element_by_id("REAL_HOMES_property_year_built")
     elem.send_keys(property['year_built'])
     time.sleep(2)
+
+
+    # go to location, add adress
+    location = driver.find_elements_by_class_name("rwmb-tab-map-location")
+    location[0].click()
+
+    locationInput = driver.find_element_by_id("REAL_HOMES_property_address")
+    locationInput.send_keys(property['property_address'])
+
+
 except Exception as e:
     print(str(e))
 
@@ -126,7 +148,7 @@ try:
         # -------- download images ---------------
         try:
             for index in range(imageCount):
-                urllib.request.urlretrieve(images[index], "file"+str(index)+".jpg")
+                urllib.request.urlretrieve(images[index], "photo"+str(index)+".jpg")
         except Exception as e:
             print(str(e))
 
@@ -136,7 +158,7 @@ try:
         # ---- upload the downloaded pic
         try:
             for index in range(imageCount):
-                filename = current_path + "/file" + str(index) + ".jpg"
+                filename = current_path + "/photo" + str(index) + ".jpg"
                 the_input.send_keys(filename)
                 time.sleep(5)
         except Exception as e: 
@@ -182,4 +204,5 @@ time.sleep(5)
 # Close
 driver.close()
 
+print("post created")
 # delete downloaded images
