@@ -1,13 +1,10 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // test that reciving curl post
-    // create_file();
 
+    // create_file();
     $property_data = ($_POST);
 
-// $pics = json_decode($property_data['photos']);
-
-// print_r($property_data);
+    // print_r($property_data);
 
 
 } else {
@@ -36,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  try {
      if (count($property_data) > 0) {
          //  --- run script ---
-         $res = shell_exec('sudo python3 script.py ' . escapeshellarg(json_encode($property_data)));
+         $res = shell_exec('sudo python3 receiver_test.py ' . escapeshellarg(json_encode($property_data)));
          shell_exec('sudo rm photo*');
          echo $res;
      }
