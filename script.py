@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
-import sys, time, json, urllib.request, os
+import sys, time, json, urllib.request, os, datetime
 
 
 # -------------- get data -------------------------
@@ -112,11 +112,9 @@ try:
     locationInput = driver.find_element_by_id("REAL_HOMES_property_address")
     locationInput.send_keys(property['property_address'])
 
-
 except Exception as e:
     print(str(e))
 
-# before publish add more data to that form..
 # ------------------------------------------------------------
 # goto image upload if only have images
 try:
@@ -146,9 +144,10 @@ try:
 
         # ----------------------------------------
         # -------- download images ---------------
+        timeStamp = str(datetime.datetime.now().timestamp())
         try:
             for index in range(imageCount):
-                urllib.request.urlretrieve(images[index], "photo"+str(index)+".jpg")
+                urllib.request.urlretrieve(images[index], timeStamp+"photo"+str(index)+".jpg")
         except Exception as e:
             print(str(e))
 
@@ -158,7 +157,7 @@ try:
         # ---- upload the downloaded pic
         try:
             for index in range(imageCount):
-                filename = current_path + "/photo" + str(index) + ".jpg"
+                filename = current_path + "/"+timeStamp+"/photo" + str(index) + ".jpg"
                 the_input.send_keys(filename)
                 time.sleep(5)
         except Exception as e: 
@@ -199,10 +198,10 @@ try:
     driver.execute_script("for(var i=0; i<document.getElementsByTagName('button').length; i++){if(document.getElementsByTagName('button')[i].innerText=='Publish'){document.getElementsByTagName('button')[i].click();}}")
 except Exception as e:
     print(str(e))
+# ----------------------------------
 
 time.sleep(5)
 # Close
 driver.close()
 
 print("post created")
-# delete downloaded images
