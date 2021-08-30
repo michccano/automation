@@ -1,12 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // create_file();
     $property_data = ($_POST);
-
-    // print_r($property_data);
-
-
 } else {
     $property_data = [
         "post-title-0" => "Demo Post",
@@ -32,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
  try {
      if (count($property_data) > 0) {
-         //  --- run script ---
          $res = shell_exec('sudo python3 receiver_test.py ' . escapeshellarg(json_encode($property_data)));
          shell_exec('sudo rm photo*');
          echo $res;
@@ -40,12 +33,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  } catch (Exception $e) {
      print_r($e);
  }
-
-
-function create_file()
-{
-    $file = dirname(__FILE__) . "/post_data.txt";
-    $open = fopen($file, "a");
-    $write = fputs($open, "received here");
-    fclose($open);
-}
