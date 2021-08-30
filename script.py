@@ -157,7 +157,7 @@ try:
         # ---- upload the downloaded pic
         try:
             for index in range(imageCount):
-                filename = current_path + "/"+timeStamp+"/photo" + str(index) + ".jpg"
+                filename = current_path + "/"+timeStamp+"photo" + str(index) + ".jpg"
                 the_input.send_keys(filename)
                 time.sleep(5)
         except Exception as e: 
@@ -197,7 +197,7 @@ try:
     # Publish
     driver.execute_script("for(var i=0; i<document.getElementsByTagName('button').length; i++){if(document.getElementsByTagName('button')[i].innerText=='Publish'){document.getElementsByTagName('button')[i].click();}}")
 except Exception as e:
-    print(str(e))
+    print("Publish Error: " + str(e))
 # ----------------------------------
 
 time.sleep(5)
