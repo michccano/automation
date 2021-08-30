@@ -2,6 +2,7 @@ import sys, time, json, urllib.request, os, datetime
 
 property = json.loads(sys.argv[1])
 
-file = open("text.txt", "w") 
-file.write(property) 
+cTime = str(datetime.datetime.now().timestamp())
+file = open( cTime+"text.txt", "w") 
+file.write(json.dumps(property)) 
 file.close() 
