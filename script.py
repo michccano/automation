@@ -44,7 +44,7 @@ elem.clear()
 elem.send_keys("Jan2020!")
 
 elem.send_keys(Keys.RETURN)
-time.sleep(7)
+time.sleep(5)
 
 
 # ---- set variables to post -----
@@ -63,7 +63,10 @@ try:
         iterator+=1
         description = driver.find_elements_by_class_name("rich-text")
     time.sleep(1)
+except:
+    print("Error: Title & description")
 
+try:
     elem = driver.find_element_by_id("REAL_HOMES_property_price")
     elem.send_keys(property['property_price'])
 
@@ -103,18 +106,18 @@ try:
     elem = driver.find_element_by_id("REAL_HOMES_property_year_built")
     elem.send_keys(property['year_built'])
     time.sleep(2)
-
-
-    # go to location, add adress
+except Exception as e:
+    print("Error on fields: " + str(e))
+    
+# ---- go to location, add adress -------
+try:
     location = driver.find_elements_by_class_name("rwmb-tab-map-location")
     location[0].click()
 
     locationInput = driver.find_element_by_id("REAL_HOMES_property_address")
     locationInput.send_keys(property['property_address'])
-
-except Exception as e:
-    print(str(e))
-
+except:
+    print("Error: Adding location")  
 # ------------------------------------------------------------
 # goto image upload if only have images
 try:
@@ -196,11 +199,18 @@ try:
 
     # Publish
     driver.execute_script("for(var i=0; i<document.getElementsByTagName('button').length; i++){if(document.getElementsByTagName('button')[i].innerText=='Publish'){document.getElementsByTagName('button')[i].click();}}")
+
 except Exception as e:
     print("Publish Error: " + str(e))
 # ----------------------------------
 
 time.sleep(5)
+
+
+
+
+
+
 # Close
 driver.close()
 
